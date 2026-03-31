@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EK AUTOS</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+</head>
+<script src="script.js"></script>
+<body>
+
+    <!-- NAVBAR -->
+    <header>
+        <h1>EK AUTOS</h1>
+        <nav>
+            <a href="#">Home</a>
+            <a href="#">Cars</a>
+            <a href="#">Spare Parts</a>
+            <a href="#">Contact</a>
+        </nav>
+    </header>
+
+    <!-- HERO SECTION -->
+    <section class="hero">
+    <div class="hero-overlay">
+        <h2>Drive Luxury. Drive EK AUTOS.</h2>
+        <p>Premium cars and genuine spare parts</p>
+        <button>Explore Cars</button>
+    </div>
+</section>
+    </section>
+    <!-- CARS SECTION -->
+    <section class="cars">
+        <h2>Featured Cars</h2>
+        <div class="search-box">
+    <input type="text" id="searchInput" placeholder="Search cars...">
+    
+    <select id="priceFilter">
+        <option value="all">All Prices</option>
+        <option value="low">Below $40,000</option>
+        <option value="high">Above $40,000</option>
+    </select>
+</div>
+        <div class="car-grid">
+
+           <div class="car-card" data-price="35000">
+                <img src="https://via.placeholder.com/300x200?text=BMW+X5+2020" alt="BMW X5">
+                <h3>BMW X5 2020</h3>
+                <p>$35,000</p>
+                <button onclick="contactCar('BMW X5 2020')">Contact</button>
+            </div>
+            <div class="car-card" data-price="50000">
+                <img src="https://via.placeholder.com/300x200?text=Mercedes+G-Class" alt="Mercedes G-Class">
+                <h3>Mercedes G-Class 2019</h3>
+                <p>$50,000</p>
+                <button onclick="contactCar('Mercedes G-Class 2019')">Contact</button>
+            </div>
+
+            <div class="car-card" data-price="42000">
+                <img src="https://via.placeholder.com/300x200?text=Audi+Q7+2021" alt="Audi Q7">
+                <h3>Audi Q7 2021</h3>
+                <p>$42,000</p>
+               <button onclick="contactCar('Audi Q7 2021')">Contact</button>
+            </div>
+            <section class="cars reveal"></section>
+
+        </div>
+    </section>
+    <!-- SPARE PARTS SECTION -->
+    <section class="spare-parts">
+    <h2>Featured Spare Parts</h2>
+    <div class="parts-grid">
+        <section class="spare-parts reveal"></section>
+
+        <div class="part-card">
+            <img src="https://via.placeholder.com/200x150?text=Brake+Pads" alt="Brake Pads">
+            <h3>Brake Pads</h3>
+            <p>$50</p>
+           <button onclick="contactPart('Brake Pads')">Contact</button>
+        </div>
+ <div class="part-card">
+            <img src="https://via.placeholder.com/200x150?text=Headlights" alt="Headlights">
+            <h3>LED Headlights</h3>
+            <p>$120</p>
+            <button onclick="contactPart('LED Headlights')">Contact</button>
+        </div>
+
+        <div class="part-card">
+            <img src="https://via.placeholder.com/200x150?text=Tyres" alt="Tyres">
+            <h3>Premium Tyres</h3>
+            <p>$200</p>
+            <button onclick="contactPart('Premium Tyres')">Contact</button>
+        </div>
+          </div>
+</section>
+<!-- CONTACT SECTION -->
+<section class="contact">
+    <h2>Contact EK AUTOS</h2>
+    <p>Reach out directly via WhatsApp or call us.</p>
+    <div class="contact-buttons">
+        <a href="https://wa.me/233552807040" target="_blank">WhatsApp</a>
+        <a href="tel:+233552807040">Call Us</a>
+    </div>
+    <section class="contact reveal"></section>
+</section>
+
+    </section>
+    <!-- FOOTER -->
+  
+
+</body>
+
+</html>
+
+<footer>
+    <p>© 2026 EK AUTOS. All Rights Reserved. | Location: Accra, Ghana</p>
+</footer>
