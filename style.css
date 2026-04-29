@@ -1,8 +1,30 @@
+:root {
+    --primary: #ff5a1f;
+    --dark: #000;
+    --light: #fff;
+    --gray: #111;
+    --soft-gray: #bbb;
+}
 body {
     margin: 0;
-    font-family: Arial, sans-serif;
-    background-color: #0a0a0a;
+    font-family: 'Roboto', sans-serif;
     color: white;
+
+    background: url('images/bg.jpg') no-repeat center center fixed;
+    background-size: cover;
+}
+
+/* DARK OVERLAY */
+body::before {
+    content: "";
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+
+    background: rgba(0, 0, 0, 0.75);
+    z-index: -1;
 }
 
 /* NAVBAR */
@@ -14,7 +36,7 @@ header {
     }
 
 header h1 {
-    color: gold;
+    color: #ff5a1f;
 }
 
 nav a {
@@ -35,7 +57,7 @@ nav a {
 
 .hero button {
     padding: 12px 25px;
-    background-color: gold;
+    background-color: #ff5a1f;
     border: none;
     cursor: pointer;
     }
@@ -73,7 +95,7 @@ nav a {
 }
 .car-card:hover {
     transform: translateY(-10px);
-    box-shadow: 0 10px 20px rgba(255, 215, 0, 0.6);
+    box-shadow: 0 10px 20px rgba(255, 90, 31, 0.6);
 }
 
 /* CAR CARD TEXT */
@@ -87,11 +109,12 @@ nav a {
 }
 .car-card button {
     padding: 10px 20px;
-    background-color: gold;
+    background-color: #ff5a1f;
     border: none;
     cursor: pointer;
     border-radius: 5px;
     font-weight: bold;
+    color: white;
 }
 /* HERO UPGRADE */
 .hero {
@@ -131,11 +154,12 @@ nav a {
 /* BUTTON */
 .hero button {
     padding: 15px 30px;
-    background-color: gold;
+    background-color: #ff5a1f;
     border: none;
     font-weight: bold;
     border-radius: 8px;
     cursor: pointer;
+    color: white;
 }
 
 /* SLIDER ANIMATION */
@@ -170,16 +194,17 @@ body {
 
 .part-card:hover {
     transform: translateY(-8px);
-    box-shadow: 0 8px 18px rgba(255, 215, 0, 0.6);
+    box-shadow: 0 8px 18px rgba(255, 90, 31, 0.6);
 }
 .part-card button {
     padding: 8px 15px;
-    background-color: gold;
+    background-color: #ff5a1f;
     border: none;
     cursor: pointer;
     border-radius: 5px;
     font-weight: bold;
     margin-top: 10px;
+    color: white;
 }
 /* CONTACT SECTION */
 .contact {
@@ -201,15 +226,15 @@ body {
     display: inline-block;
     margin: 0 15px;
     padding: 12px 25px;
-    background-color: gold;
-    color: black;
+    background-color: #ff5a1f;
+    color: white;
     text-decoration: none;
     font-weight: bold;
     border-radius: 6px;
     transition: background-color 0.3s;
 }
 .contact-buttons a:hover {
-    background-color: #ffcc00;
+    background-color: #e04a10;
     }
 /* NAVBAR STICKY */
 header {
@@ -243,7 +268,7 @@ nav a::after {
     position: absolute;
     width: 0%;
     height: 2px;
-    background: gold;
+    background: #ff5a1f;
     left: 0;
     bottom: -5px;
     transition: 0.3s;
@@ -307,4 +332,264 @@ nav a:hover::after {
 }
 body {
     overflow-x: hidden;
+}
+.car-details {
+    text-align: center;
+    padding: 50px 20px;
+}
+
+.car-details img {
+    width: 80%;
+    max-width: 600px;
+    border-radius: 10px;
+    margin-bottom: 20px;
+}
+
+.car-details h2 {
+    font-size: 32px;
+    margin-bottom: 10px;
+}
+
+.car-details p {
+    font-size: 18px;
+    margin-bottom: 10px;
+}
+
+#whatsappBtn {
+    padding: 15px 30px;
+    background-color: #ff5a1f;
+    border: none;
+    border-radius: 8px;
+    font-weight: bold;
+    cursor: pointer;
+    color: white;
+}
+/* GALLERY */
+.thumbnail-container {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin-bottom: 20px;
+}
+
+.thumbnail-container img {
+    width: 80px;
+    height: 60px;
+    object-fit: cover;
+    cursor: pointer;
+    border-radius: 5px;
+    opacity: 0.7;
+    transition: 0.3s;
+}
+
+.thumbnail-container img:hover {
+    opacity: 1;
+    transform: scale(1.05);
+}
+
+/* MAIN IMAGE */
+#mainImage {
+    width: 80%;
+    max-width: 600px;
+    border-radius: 10px;
+    margin-bottom: 15px;
+}
+.terms {
+    padding: 80px 20px;
+    background-color: rgba(0, 0, 0, 0.85);
+    text-align: center;
+}
+
+.terms h2 {
+    font-size: 36px;
+    margin-bottom: 30px;
+    color: #ff5a1f;
+}
+
+.terms-content {
+    max-width: 800px;
+    margin: auto;
+    text-align: left;
+}
+
+.terms-content h3 {
+    margin-top: 20px;
+    color: #ddd;
+}
+
+.terms-content p {
+    line-height: 1.6;
+    color: #bbb;
+}
+/* IMAGE QUALITY FIX */
+img {
+    object-fit: cover;
+}
+
+/* CAR CARD IMAGE */
+.car-card img {
+    height: 200px;
+    border-radius: 8px;
+}
+.part-card img {
+    width: 100%;
+    height: 150px;
+    object-fit: cover;
+    border-radius: 8px;
+}
+.part-card img {
+    transition: transform 0.3s;
+}
+
+.part-card:hover img {
+    transform: scale(1.05);
+}
+.contact {
+    padding: 80px 20px;
+    background: linear-gradient(to right, #000, #111);
+    text-align: center;
+}
+
+.contact h2 {
+    font-size: 40px;
+    color: #ff5a1f;
+    margin-bottom: 10px;
+}
+
+.subtitle {
+    color: #bbb;
+    margin-bottom: 40px;
+}
+
+/* CONTACT CARDS */
+.contact-container {
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+    flex-wrap: wrap;
+}
+
+.contact-card {
+    background: #111;
+    padding: 25px;
+    width: 250px;
+    border-radius: 12px;
+    transition: 0.3s;
+}
+
+.contact-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 10px 25px rgba(255, 90, 31, 0.5);
+}
+
+.contact-card h3 {
+    margin-bottom: 10px;
+}
+
+.contact-card p {
+    color: #bbb;
+    margin-bottom: 15px;
+}
+
+.contact-card a {
+    display: inline-block;
+    padding: 10px 20px;
+    background: #ff5a1f;
+    color: white;
+    text-decoration: none;
+    border-radius: 5px;
+    font-weight: bold;
+}
+
+/* SOCIAL SECTION */
+.socials {
+    margin-top: 60px;
+}
+
+.social-links a {
+    margin: 10px;
+    display: inline-block;
+    padding: 10px 20px;
+    background: #222;
+    border-radius: 5px;
+    text-decoration: none;
+    color: white;
+    transition: 0.3s;
+}
+
+.social-links a:hover {
+    background: #ff5a1f;
+    color: white;
+}
+.location {
+    padding: 80px 20px;
+    text-align: center;
+    background-color: #000;
+}
+
+.location h2 {
+    color: #ff5a1f;
+    font-size: 36px;
+    margin-bottom: 10px;
+}
+
+.location p {
+    color: #bbb;
+    margin-bottom: 30px;
+}
+
+/* MAP */
+.map-container {
+    max-width: 900px;
+    margin: auto;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 10px 25px rgba(255, 90, 31, 0.4);
+}
+.logo img {
+    height: 50px;
+    object-fit: contain;
+}
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 40px;
+
+    background: rgba(0,0,0,0.9);
+    backdrop-filter: blur(10px);
+
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+}
+
+/* NAV LINKS */
+nav a {
+    margin-left: 25px;
+    text-decoration: none;
+    color: white;
+    font-weight: 500;
+    position: relative;
+    transition: 0.3s;
+}
+
+/* HOVER EFFECT */
+nav a::after {
+    content: "";
+    position: absolute;
+    width: 0%;
+    height: 2px;
+    background: #ff5a1f;
+    left: 0;
+    bottom: -5px;
+    transition: 0.3s;
+}
+
+nav a:hover::after {
+    width: 100%;
+}
+
+nav a:hover {
+    color: #ff5a1f;
 }
