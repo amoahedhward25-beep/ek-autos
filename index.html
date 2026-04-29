@@ -7,200 +7,380 @@
     <title>EK AUTOS</title>
     <link rel="stylesheet" href="style.css">
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        /* ── HAMBURGER BUTTON ── */
+        .hamburger {
+            display: none;
+            flex-direction: column;
+            gap: 5px;
+            cursor: pointer;
+            background: none;
+            border: none;
+            padding: 5px;
+        }
+        .hamburger span {
+            display: block;
+            width: 25px;
+            height: 3px;
+            background: white;
+            border-radius: 3px;
+            transition: 0.3s;
+        }
+
+        /* ── MOBILE STYLES ── */
+        @media (max-width: 768px) {
+
+            /* NAVBAR */
+            header {
+                padding: 15px 20px;
+                flex-direction: row;
+                justify-content: space-between;
+                align-items: center;
+            }
+
+            .hamburger {
+                display: flex;
+            }
+
+            nav {
+                display: none;
+                position: absolute;
+                top: 70px;
+                left: 0;
+                right: 0;
+                background: rgba(0, 0, 0, 0.97);
+                padding: 20px;
+                z-index: 999;
+                text-align: center;
+            }
+
+            nav.open {
+                display: block;
+            }
+
+            nav a {
+                display: block;
+                margin: 15px 0;
+                font-size: 18px;
+            }
+
+            /* HERO */
+            .hero {
+                height: 70vh;
+            }
+
+            .hero h2 {
+                font-size: 26px;
+                padding: 0 15px;
+            }
+
+            .hero p {
+                font-size: 15px;
+                padding: 0 15px;
+            }
+
+            .hero button {
+                padding: 12px 24px;
+                font-size: 15px;
+            }
+
+            /* CARS & PARTS GRIDS */
+            .car-grid,
+            .parts-grid {
+                flex-direction: column;
+                align-items: center;
+                gap: 20px;
+            }
+
+            .car-card {
+                width: 90%;
+                max-width: 380px;
+            }
+
+            .part-card {
+                width: 90%;
+                max-width: 380px;
+            }
+
+            /* BUTTONS on cards — stack them */
+            .car-card button {
+                display: block;
+                width: 100%;
+                margin-top: 8px;
+            }
+
+            /* SEARCH BOX */
+            .search-box {
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .search-box input,
+            .search-box select {
+                width: 85%;
+                font-size: 15px;
+            }
+
+            /* CONTACT CARDS */
+            .contact-container {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .contact-card {
+                width: 85%;
+                max-width: 380px;
+            }
+
+            /* SECTION HEADINGS */
+            .cars h2,
+            .spare-parts h2,
+            .contact h2,
+            .terms h2 {
+                font-size: 26px;
+            }
+
+            /* TERMS */
+            .terms {
+                padding: 50px 20px;
+            }
+
+            .terms-content {
+                padding: 0 5px;
+            }
+
+            /* MAP */
+            .map-container iframe {
+                height: 250px;
+            }
+
+            /* FOOTER */
+            footer {
+                font-size: 13px;
+                padding: 15px 10px;
+                text-align: center;
+            }
+
+            /* CAR DETAILS PAGE */
+            .car-details img,
+            #mainImage {
+                width: 95%;
+            }
+
+            .thumbnail-container img {
+                width: 60px;
+                height: 45px;
+            }
+        }
+
+        /* ── FOOTER BASE STYLE ── */
+        footer {
+            background: #000;
+            color: #bbb;
+            text-align: center;
+            padding: 20px;
+            font-size: 14px;
+        }
+    </style>
 </head>
+
 <script src="script.js"></script>
+
 <body>
 
     <!-- NAVBAR -->
     <header>
         <div class="logo">
-    <img src="images/logo.png" alt="EK AUTOS Logo">
-       </div>
-        <nav>
-        <a href="#">Home</a>
-        <a href="#cars">Cars</a>
-        <a href="#spare-parts">Parts</a>
-        <a href="#contact">Contact</a>
-    </nav>
-</header>
+            <img src="images/logo.png" alt="EK AUTOS Logo">
+        </div>
+
+        <!-- Hamburger button (mobile only) -->
+        <button class="hamburger" id="hamburger" aria-label="Open menu">
+            <span></span>
+            <span></span>
+            <span></span>
+        </button>
+
+        <nav id="navMenu">
+            <a href="#" onclick="closeMenu()">Home</a>
+            <a href="#cars" onclick="closeMenu()">Cars</a>
+            <a href="#spare-parts" onclick="closeMenu()">Parts</a>
+            <a href="#contact" onclick="closeMenu()">Contact</a>
+        </nav>
     </header>
 
     <!-- HERO SECTION -->
     <section class="hero">
-    <div class="hero-overlay">
-        <h2>Drive Luxury. Drive EK AUTOS.</h2>
-        <p>Premium cars and genuine spare parts</p>
-        <button>Explore Cars</button>
-    </div>
-</section>
+        <div class="hero-overlay">
+            <h2>Drive Luxury. Drive EK AUTOS.</h2>
+            <p>Premium cars and genuine spare parts</p>
+            <button>Explore Cars</button>
+        </div>
     </section>
+
     <!-- CARS SECTION -->
-    <section class="cars">
+    <section class="cars" id="cars">
         <h2>Featured Cars</h2>
         <div class="search-box">
-    <input type="text" id="searchInput" placeholder="Search cars...">
-    
-    <select id="priceFilter">
-        <option value="all">All Prices</option>
-        <option value="low">Below $40,000</option>
-        <option value="high">Above $40,000</option>
-    </select>
-</div>
+            <input type="text" id="searchInput" placeholder="Search cars...">
+            <select id="priceFilter">
+                <option value="all">All Prices</option>
+                <option value="low">Below $40,000</option>
+                <option value="high">Above $40,000</option>
+            </select>
+        </div>
+
         <div class="car-grid">
 
-           <div class="car-card" data-price="35000">
+            <div class="car-card" data-price="35000">
                 <img src="images/elafront.jpg" alt="2012 ELANTRA">
-                <h3>2012 HYUNDAI ELANTRA </h3>
+                <h3>2012 HYUNDAI ELANTRA</h3>
                 <button onclick="contactCar('2012 HYUNDAI ELANTRA')">Contact</button>
-              <button onclick="viewCar(
-  '2012 HYUNDAI ELANTRA',
-  '$4,800',
-  'Luxury sedan, fuel efficient and reliable, price includes buying and shipping.',
-  ['images/elafront.jpg','images/elaengine.jpg','images/elaback.jpg']
-)">
-View Details
-</button>
+                <button onclick="viewCar(
+                    '2012 HYUNDAI ELANTRA',
+                    '$4,800',
+                    'Luxury sedan, fuel efficient and reliable, price includes buying and shipping.',
+                    ['images/elafront.jpg','images/elaengine.jpg','images/elaback.jpg']
+                )">View Details</button>
             </div>
+
             <div class="car-card" data-price="50000">
                 <img src="images/nfront.jpg" alt="NISSAN NOTE">
                 <h3>2015 NISSAN NOTE</h3>
                 <button onclick="contactCar('2015 NISSAN NOTE')">Contact</button>
-                 <button onclick="viewCar(
-  '2015 NISSAN NOTE',
-  '$7,300',
-  'Luxury sedan, fuel efficient and reliable',
-  ['images/nfront.jpg','images/nengine.jpg','images/nback.jpg','images/ninterior.jpg'])">
-View Details
-</button>
+                <button onclick="viewCar(
+                    '2015 NISSAN NOTE',
+                    '$7,300',
+                    'Luxury sedan, fuel efficient and reliable',
+                    ['images/nfront.jpg','images/nengine.jpg','images/nback.jpg','images/ninterior.jpg']
+                )">View Details</button>
             </div>
 
             <div class="car-card" data-price="42000">
-               <img src="images/civicfront.jpg" alt="2019 HONDA CIVIC">
+                <img src="images/civicfront.jpg" alt="2019 HONDA CIVIC">
                 <h3>2019 HONDA CIVIC</h3>
                 <button onclick="contactCar('2019 HONDA CIVIC')">Contact</button>
-               <button onclick="viewCar(
-  '2019 HONDA CIVIC',
-  '$18,250',
-  'Luxury sedan, fuel efficient and reliable',
-  ['images/civicfront.jpg','images/civicengine.jpg','images/civicback.jpg','images/civicinterior.jpg']
-)">
-View Details</button>
+                <button onclick="viewCar(
+                    '2019 HONDA CIVIC',
+                    '$18,250',
+                    'Luxury sedan, fuel efficient and reliable',
+                    ['images/civicfront.jpg','images/civicengine.jpg','images/civicback.jpg','images/civicinterior.jpg']
+                )">View Details</button>
             </div>
-            <section class="cars reveal"></section>
 
         </div>
     </section>
+
     <!-- SPARE PARTS SECTION -->
-    <section class="spare-parts">
-    <h2>Featured Spare Parts</h2>
-    <div class="parts-grid">
-        <section class="spare-parts reveal"></section>
+    <section class="spare-parts" id="spare-parts">
+        <h2>Featured Spare Parts</h2>
+        <div class="parts-grid">
 
-        <div class="part-card">
-            <img src="images/headlight.jpg" alt="Headlights">
-            <h3>HEADLIGHTS</h3>
-            <p>$50</p>
-           <button onclick="contactPart('HEADLIGHTS')">Contact</button>
+            <div class="part-card">
+                <img src="images/headlight.jpg" alt="Headlights">
+                <h3>HEADLIGHTS</h3>
+                <p>$50</p>
+                <button onclick="contactPart('HEADLIGHTS')">Contact</button>
+            </div>
+
+            <div class="part-card">
+                <img src="images/grilles.jpg" alt="GRILLES AND SHELLS">
+                <h3>GRILLES AND SHELLS</h3>
+                <p>$30</p>
+                <button onclick="contactPart('GRILLES AND SHELLS')">Contact</button>
+            </div>
+
+            <div class="part-card">
+                <img src="images/bumper.jpg" alt="BUMPERS">
+                <h3>BUMPERS</h3>
+                <p>$370</p>
+                <button onclick="contactPart('BUMPERS')">Contact</button>
+            </div>
+
         </div>
- <div class="part-card">
-            <img src="images/grilles.jpg" alt="GRILLES AND SHELLS">
-            <h3>GRILLES AND SHELLS</h3>
-            <p>$30</p>
-            <button onclick="contactPart('GRILLES AND SHELLS')">Contact</button>
-        </div>
-
-        <div class="part-card">
-            <img src="images/bumper.jpg" alt="BUMPERS">
-            <h3>BUMPERS</h3>
-            <p>$370</p>
-            <button onclick="contactPart('BUMPERS')">Contact</button>
-        </div>
-          </div>
-</section>
-<section class="contact">
-    <h2>Get In Touch</h2>
-    <p class="subtitle">We’re ready to help you find the perfect car or spare part.</p>
-
-    <div class="contact-container">
-
-        <!-- CONTACT CARDS -->
-        <div class="contact-card">
-            <h3>WhatsApp</h3>
-            <p>Chat with us instantly</p>
-            <a href="https://wa.me/233552807040" target="_blank">Start Chat</a>
-        </div>
-
-        <div class="contact-card">
-            <h3>Call Us</h3>
-            <p>Speak directly with our team</p>
-            <a href="tel:+233552807040">Call Now</a>
-        </div>
-
-        <div class="contact-card">
-            <h3>Email</h3>
-            <p>Send us your request</p>
-            <a href="mailto:ekautos@email.com">Send Email</a>
-        </div>
-
-    </div>
-
-    <!-- SOCIAL MEDIA -->
-    <div class="socials">
-        <h3>Follow EK AUTOS</h3>
-
-        <div class="social-links">
-          <a href="https://instagram.com/yourpage" target="_blank">Instagram</a>
-          <a href="https://facebook.com/yourpage" target="_blank">Facebook</a>
-          <a href="https://tiktok.com/@yourpage" target="_blank">TikTok</a>
-        </div>
-    </div>
-</section>
-</section>
-
     </section>
+
+    <!-- CONTACT SECTION -->
+    <section class="contact" id="contact">
+        <h2>Get In Touch</h2>
+        <p class="subtitle">We're ready to help you find the perfect car or spare part.</p>
+
+        <div class="contact-container">
+            <div class="contact-card">
+                <h3>WhatsApp</h3>
+                <p>Chat with us instantly</p>
+                <a href="https://wa.me/233552807040" target="_blank">Start Chat</a>
+            </div>
+            <div class="contact-card">
+                <h3>Call Us</h3>
+                <p>Speak directly with our team</p>
+                <a href="tel:+233552807040">Call Now</a>
+            </div>
+            <div class="contact-card">
+                <h3>Email</h3>
+                <p>Send us your request</p>
+                <a href="mailto:ekautos@email.com">Send Email</a>
+            </div>
+        </div>
+
+        <div class="socials">
+            <h3>Follow EK AUTOS</h3>
+            <div class="social-links">
+                <a href="https://instagram.com/yourpage" target="_blank">Instagram</a>
+                <a href="https://facebook.com/yourpage" target="_blank">Facebook</a>
+                <a href="https://tiktok.com/@yourpage" target="_blank">TikTok</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- TERMS & MAP SECTION -->
+    <section class="terms reveal">
+        <h2>Terms of Service</h2>
+        <div class="terms-content">
+            <h3>How We Work</h3>
+            <p>At EK AUTOS, we specialize in sourcing and delivering quality vehicles and genuine spare parts tailored
+                to our clients' needs and budgets. Customers consult with us by sharing their preferred vehicle type
+                and budget, and we handle the process of finding suitable options from trusted sources worldwide.
+                We deal in a wide range of vehicles, including brand-new, used, and accident vehicles, depending on
+                customer preference.</p>
+
+            <h3>Important Notice</h3>
+            <p>All vehicles and parts are subject to availability. Customers are encouraged to inspect items before
+                purchase. EK AUTOS is not responsible for third-party delays or documentation processing times.</p>
+
+            <h3>Payments & Agreements</h3>
+            <p>Payments are handled securely through agreed channels. Full ownership transfer is completed only after
+                confirmed payment and documentation processing.</p>
+        </div>
+
+        <h2>Visit Our Showroom</h2>
+        <p>Accra, Ghana — EK AUTOS</p>
+        <div class="map-container">
+            <iframe src="https://www.google.com/maps?q=Accra,Ghana&output=embed"
+                width="100%" height="400" style="border:0;" allowfullscreen="" loading="lazy">
+            </iframe>
+        </div>
+    </section>
+
     <!-- FOOTER -->
-  
+    <footer>
+        <p>© 2026 EK AUTOS. All Rights Reserved. | Location: Accra, Ghana</p>
+    </footer>
+
+    <script>
+        // HAMBURGER MENU
+        const hamburger = document.getElementById('hamburger');
+        const navMenu = document.getElementById('navMenu');
+
+        hamburger.addEventListener('click', () => {
+            navMenu.classList.toggle('open');
+        });
+
+        function closeMenu() {
+            navMenu.classList.remove('open');
+        }
+    </script>
 
 </body>
-
 </html>
-<section class="terms reveal">
-    <h2>Terms of Service</h2>
-
-    <div class="terms-content">
-        <h3>How We Work</h3>
-        <p>
-            At EK AUTOS, we specialize in sourcing and delivering quality vehicles and genuine spare parts tailored to our clients’ needs and budgets. Customers consult with us by sharing their preferred vehicle type and budget, and we handle the process of finding suitable options from trusted sources worldwide.
-
-We deal in a wide range of vehicles, including brand-new, used, and accident vehicles, depending on customer preference.
-        </p>
-
-        <h3>Important Notice</h3>
-        <p>
-            All vehicles and parts are subject to availability. Customers are encouraged to inspect items before purchase.
-            EK AUTOS is not responsible for third-party delays or documentation processing times.
-        </p>
-
-        <h3>Payments & Agreements</h3>
-        <p>
-            Payments are handled securely through agreed channels. Full ownership transfer is completed only after
-            confirmed payment and documentation processing.
-        </p>
-    </div>
-      <h2>Visit Our Showroom</h2>
-    <p>Accra, Ghana — EK AUTOS</p>
-
-    <div class="map-container">
-        <iframe 
-            src="https://www.google.com/maps?q=Accra,Ghana&output=embed"
-            width="100%" 
-            height="400" 
-            style="border:0;" 
-            allowfullscreen="" 
-            loading="lazy">
-        </iframe>
-    </div>
-</section>
-<footer>
-    <p>© 2026 EK AUTOS. All Rights Reserved. | Location: Accra, Ghana</p>
-</footer>
