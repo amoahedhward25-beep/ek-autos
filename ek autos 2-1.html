@@ -1,0 +1,1157 @@
+ <!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>EK AUTOS – Premium Vehicles & Spare Parts | Accra, Ghana</title>
+  <meta name="description" content="EK AUTOS specializes in sourcing quality vehicles and genuine spare parts in Accra, Ghana. Brand-new, used, and accident vehicles. Visit us at 18 Peregrino Street, Abossey Okai." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --obsidian: #0A0A0F;
+      --obsidian-2: #111118;
+      --obsidian-3: #1A1A24;
+      --orange: #FF6B00;
+      --orange-light: #FF8C2E;
+      --orange-glow: rgba(255, 107, 0, 0.18);
+      --chrome: #C8C8D0;
+      --ghost: #F5F5F7;
+      --muted: #7A7A8A;
+      --card-bg: #14141C;
+      --border: rgba(255,255,255,0.07);
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--obsidian);
+      color: var(--ghost);
+      font-family: 'Inter', sans-serif;
+      overflow-x: hidden;
+      cursor: none;
+    }
+
+    /* ── CUSTOM CURSOR ── */
+    #cursor {
+      width: 12px; height: 12px;
+      background: var(--orange);
+      border-radius: 50%;
+      position: fixed; top: 0; left: 0;
+      pointer-events: none;
+      z-index: 9999;
+      transform: translate(-50%, -50%);
+      transition: width .2s, height .2s, background .2s;
+      mix-blend-mode: normal;
+    }
+    #cursor-ring {
+      width: 36px; height: 36px;
+      border: 1.5px solid var(--orange);
+      border-radius: 50%;
+      position: fixed; top: 0; left: 0;
+      pointer-events: none;
+      z-index: 9998;
+      transform: translate(-50%, -50%);
+      transition: transform 0.12s ease, width .2s, height .2s, border-color .2s;
+      opacity: 0.7;
+    }
+    body:has(a:hover) #cursor, body:has(button:hover) #cursor { width: 20px; height: 20px; background: var(--orange-light); }
+    body:has(a:hover) #cursor-ring, body:has(button:hover) #cursor-ring { width: 52px; height: 52px; }
+
+    /* ── NAV ── */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0;
+      z-index: 100;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 0 5vw;
+      height: 72px;
+      background: rgba(10,10,15,0.6);
+      backdrop-filter: blur(20px);
+      border-bottom: 1px solid var(--border);
+      transition: background .4s;
+    }
+    nav.scrolled { background: rgba(10,10,15,0.92); }
+    .nav-logo {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 1.9rem;
+      letter-spacing: 0.08em;
+      color: var(--ghost);
+      text-decoration: none;
+    }
+    .nav-logo span { color: var(--orange); }
+    .nav-links { display: flex; gap: 2.2rem; list-style: none; }
+    .nav-links a {
+      color: var(--chrome);
+      text-decoration: none;
+      font-size: 0.88rem;
+      font-weight: 500;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      position: relative;
+      padding-bottom: 3px;
+      transition: color .25s;
+    }
+    .nav-links a::after {
+      content: '';
+      position: absolute; left: 0; bottom: 0;
+      width: 0; height: 1.5px;
+      background: var(--orange);
+      transition: width .3s ease;
+    }
+    .nav-links a:hover { color: var(--ghost); }
+    .nav-links a:hover::after { width: 100%; }
+    .nav-cta {
+      background: var(--orange);
+      color: #fff !important;
+      padding: 9px 22px !important;
+      border-radius: 4px;
+      font-weight: 600 !important;
+      transition: background .25s, transform .2s !important;
+    }
+    .nav-cta::after { display: none !important; }
+    .nav-cta:hover { background: var(--orange-light) !important; transform: translateY(-1px); }
+    .hamburger {
+      display: none; flex-direction: column; gap: 5px;
+      cursor: pointer; padding: 4px;
+    }
+    .hamburger span {
+      width: 26px; height: 2px;
+      background: var(--ghost);
+      border-radius: 2px;
+      transition: .3s;
+    }
+    .mobile-menu {
+      display: none;
+      position: fixed; top: 72px; left: 0; right: 0;
+      background: rgba(10,10,15,0.97);
+      backdrop-filter: blur(20px);
+      padding: 2rem 5vw;
+      border-bottom: 1px solid var(--border);
+      z-index: 99;
+    }
+    .mobile-menu.open { display: block; }
+    .mobile-menu ul { list-style: none; display: flex; flex-direction: column; gap: 1.4rem; }
+    .mobile-menu a {
+      color: var(--chrome);
+      text-decoration: none;
+      font-size: 1.1rem;
+      font-weight: 500;
+      transition: color .2s;
+    }
+    .mobile-menu a:hover { color: var(--orange); }
+
+    /* ── HERO ── */
+    .hero {
+      min-height: 100vh;
+      display: flex; align-items: center; justify-content: center;
+      position: relative;
+      overflow: hidden;
+      background: var(--obsidian);
+    }
+    .hero-bg {
+      position: absolute; inset: 0;
+      background:
+        radial-gradient(ellipse 60% 50% at 70% 50%, rgba(255,107,0,0.10) 0%, transparent 70%),
+        radial-gradient(ellipse 40% 40% at 20% 80%, rgba(255,107,0,0.06) 0%, transparent 60%);
+    }
+    /* Headlight beam that follows mouse */
+    .beam {
+      position: absolute; inset: 0;
+      background: radial-gradient(ellipse 500px 300px at var(--mx, 70%) var(--my, 50%), rgba(255,107,0,0.08) 0%, transparent 70%);
+      pointer-events: none;
+      transition: background 0.05s;
+    }
+    /* Grid lines */
+    .hero-grid {
+      position: absolute; inset: 0;
+      background-image:
+        linear-gradient(rgba(255,255,255,0.025) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,0.025) 1px, transparent 1px);
+      background-size: 60px 60px;
+      mask-image: radial-gradient(ellipse 80% 80% at 50% 50%, black 40%, transparent 100%);
+    }
+    .hero-content {
+      position: relative; z-index: 2;
+      text-align: center;
+      padding: 0 5vw;
+      max-width: 900px;
+    }
+    .hero-eyebrow {
+      display: inline-flex; align-items: center; gap: 10px;
+      font-size: 0.78rem;
+      font-weight: 600;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--orange);
+      margin-bottom: 1.5rem;
+      opacity: 0;
+      animation: fadeUp .7s .2s forwards;
+    }
+    .hero-eyebrow::before, .hero-eyebrow::after {
+      content: '';
+      width: 40px; height: 1px;
+      background: var(--orange);
+      opacity: 0.5;
+    }
+    .hero-title {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: clamp(3.5rem, 10vw, 8.5rem);
+      line-height: 0.92;
+      letter-spacing: 0.02em;
+      color: var(--ghost);
+      margin-bottom: 1.5rem;
+      opacity: 0;
+      animation: fadeUp .7s .4s forwards;
+    }
+    .hero-title .accent { color: var(--orange); display: block; }
+    .hero-sub {
+      font-size: clamp(1rem, 2vw, 1.18rem);
+      color: var(--chrome);
+      font-weight: 300;
+      line-height: 1.7;
+      max-width: 580px;
+      margin: 0 auto 2.5rem;
+      opacity: 0;
+      animation: fadeUp .7s .6s forwards;
+    }
+    .hero-actions {
+      display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap;
+      opacity: 0;
+      animation: fadeUp .7s .8s forwards;
+    }
+    .btn-primary {
+      background: var(--orange);
+      color: #fff;
+      padding: 15px 34px;
+      border-radius: 4px;
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 0.95rem;
+      letter-spacing: 0.04em;
+      transition: background .25s, transform .2s, box-shadow .25s;
+      display: inline-flex; align-items: center; gap: 8px;
+    }
+    .btn-primary:hover {
+      background: var(--orange-light);
+      transform: translateY(-2px);
+      box-shadow: 0 12px 40px rgba(255,107,0,0.35);
+    }
+    .btn-outline {
+      border: 1.5px solid rgba(255,255,255,0.2);
+      color: var(--ghost);
+      padding: 15px 34px;
+      border-radius: 4px;
+      text-decoration: none;
+      font-weight: 500;
+      font-size: 0.95rem;
+      letter-spacing: 0.04em;
+      transition: border-color .25s, background .25s, transform .2s;
+      display: inline-flex; align-items: center; gap: 8px;
+    }
+    .btn-outline:hover {
+      border-color: var(--orange);
+      background: var(--orange-glow);
+      transform: translateY(-2px);
+    }
+    .hero-scroll {
+      position: absolute; bottom: 2.5rem; left: 50%;
+      transform: translateX(-50%);
+      display: flex; flex-direction: column; align-items: center; gap: 8px;
+      color: var(--muted);
+      font-size: 0.72rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      animation: bounce 2s infinite;
+      z-index: 2;
+    }
+    .scroll-line {
+      width: 1px; height: 40px;
+      background: linear-gradient(to bottom, var(--orange), transparent);
+    }
+
+    /* ── STATS BAR ── */
+    .stats-bar {
+      background: var(--card-bg);
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+      padding: 2rem 5vw;
+      display: flex; justify-content: center; align-items: center;
+      gap: 0;
+      flex-wrap: wrap;
+    }
+    .stat-item {
+      flex: 1; min-width: 140px;
+      text-align: center;
+      padding: 1rem 2rem;
+      position: relative;
+    }
+    .stat-item + .stat-item::before {
+      content: '';
+      position: absolute; left: 0; top: 20%; bottom: 20%;
+      width: 1px;
+      background: var(--border);
+    }
+    .stat-num {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 2.8rem;
+      color: var(--orange);
+      line-height: 1;
+      display: block;
+    }
+    .stat-label {
+      font-size: 0.78rem;
+      color: var(--muted);
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      margin-top: 4px;
+    }
+
+    /* ── SECTION COMMONS ── */
+    section { padding: 7rem 5vw; }
+    .section-label {
+      font-size: 0.72rem;
+      font-weight: 700;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--orange);
+      margin-bottom: 0.8rem;
+    }
+    .section-title {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: clamp(2.4rem, 5vw, 4rem);
+      line-height: 1.05;
+      color: var(--ghost);
+      margin-bottom: 1.2rem;
+    }
+    .section-sub {
+      color: var(--chrome);
+      font-size: 1.05rem;
+      font-weight: 300;
+      line-height: 1.7;
+      max-width: 560px;
+    }
+    .section-header { margin-bottom: 4rem; }
+
+    /* ── SERVICES ── */
+    #services { background: var(--obsidian-2); }
+    .services-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 1.5px;
+      background: var(--border);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      overflow: hidden;
+    }
+    .service-card {
+      background: var(--card-bg);
+      padding: 2.5rem;
+      transition: background .3s;
+      position: relative;
+      overflow: hidden;
+    }
+    .service-card::before {
+      content: '';
+      position: absolute; top: 0; left: 0; right: 0;
+      height: 2px;
+      background: var(--orange);
+      transform: scaleX(0);
+      transform-origin: left;
+      transition: transform .4s ease;
+    }
+    .service-card:hover { background: #1a1a26; }
+    .service-card:hover::before { transform: scaleX(1); }
+    .service-icon {
+      font-size: 2.2rem;
+      margin-bottom: 1.2rem;
+      display: block;
+    }
+    .service-card h3 {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 1.55rem;
+      letter-spacing: 0.05em;
+      color: var(--ghost);
+      margin-bottom: 0.8rem;
+    }
+    .service-card p {
+      color: var(--muted);
+      font-size: 0.93rem;
+      line-height: 1.7;
+    }
+
+    /* ── HOW WE WORK ── */
+    #how-we-work { background: var(--obsidian); }
+    .how-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 5rem;
+      align-items: center;
+    }
+    .how-content .section-sub { max-width: 100%; margin-bottom: 2rem; }
+    .process-steps { display: flex; flex-direction: column; gap: 0; }
+    .step {
+      display: flex; gap: 1.5rem;
+      padding: 1.5rem 0;
+      border-bottom: 1px solid var(--border);
+      position: relative;
+      transition: padding-left .3s;
+    }
+    .step:last-child { border-bottom: none; }
+    .step:hover { padding-left: 8px; }
+    .step-num {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 2.5rem;
+      color: var(--orange);
+      opacity: 0.5;
+      min-width: 48px;
+      line-height: 1;
+      transition: opacity .3s;
+    }
+    .step:hover .step-num { opacity: 1; }
+    .step-text h4 {
+      font-weight: 600;
+      font-size: 1rem;
+      color: var(--ghost);
+      margin-bottom: 0.3rem;
+    }
+    .step-text p { color: var(--muted); font-size: 0.9rem; line-height: 1.6; }
+    /* Notice box */
+    .notice-box {
+      background: var(--obsidian-3);
+      border: 1px solid var(--orange);
+      border-left: 4px solid var(--orange);
+      border-radius: 6px;
+      padding: 1.5rem 1.8rem;
+      margin-top: 2.5rem;
+    }
+    .notice-box h4 {
+      font-weight: 600;
+      font-size: 0.85rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--orange);
+      margin-bottom: 0.6rem;
+    }
+    .notice-box p { color: var(--chrome); font-size: 0.9rem; line-height: 1.65; }
+    /* How right visual */
+    .how-visual {
+      position: relative;
+      min-height: 400px;
+      display: flex; align-items: center; justify-content: center;
+    }
+    .hex-bg {
+      position: absolute; inset: 0;
+      background:
+        radial-gradient(circle at 60% 40%, rgba(255,107,0,0.12) 0%, transparent 60%);
+      border-radius: 12px;
+    }
+    .how-cards {
+      position: relative; z-index: 1;
+      display: flex; flex-direction: column; gap: 1rem;
+      width: 100%;
+    }
+    .how-card {
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 1.3rem 1.5rem;
+      display: flex; align-items: center; gap: 1rem;
+      transition: border-color .3s, transform .3s;
+    }
+    .how-card:hover { border-color: var(--orange); transform: translateX(6px); }
+    .how-card-icon { font-size: 1.6rem; flex-shrink: 0; }
+    .how-card-text { font-size: 0.9rem; color: var(--chrome); line-height: 1.5; }
+    .how-card-text strong { color: var(--ghost); display: block; font-size: 0.95rem; margin-bottom: 2px; }
+
+    /* ── INVENTORY / JIJI ── */
+    #inventory { background: var(--obsidian-2); }
+    .inventory-inner {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+    }
+    .inventory-inner .section-sub { margin: 0 auto 3rem; max-width: 600px; }
+    .vehicle-types {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 1.2rem;
+      width: 100%;
+      margin-bottom: 3.5rem;
+    }
+    .vehicle-type-card {
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 2rem 1.5rem;
+      text-align: center;
+      transition: border-color .3s, transform .3s, box-shadow .3s;
+      cursor: default;
+    }
+    .vehicle-type-card:hover {
+      border-color: var(--orange);
+      transform: translateY(-6px);
+      box-shadow: 0 20px 50px rgba(255,107,0,0.12);
+    }
+    .vehicle-type-card .icon { font-size: 2.5rem; display: block; margin-bottom: 1rem; }
+    .vehicle-type-card h3 {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 1.4rem;
+      letter-spacing: 0.05em;
+      color: var(--ghost);
+      margin-bottom: 0.4rem;
+    }
+    .vehicle-type-card p { color: var(--muted); font-size: 0.85rem; }
+    .jiji-banner {
+      background: linear-gradient(135deg, var(--card-bg) 0%, #1e1e2c 100%);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 3rem;
+      display: flex;
+      align-items: center; justify-content: space-between;
+      gap: 2rem;
+      flex-wrap: wrap;
+      width: 100%;
+      position: relative;
+      overflow: hidden;
+    }
+    .jiji-banner::before {
+      content: '';
+      position: absolute; right: -80px; top: -80px;
+      width: 300px; height: 300px;
+      background: radial-gradient(circle, rgba(255,107,0,0.08) 0%, transparent 70%);
+    }
+    .jiji-text h3 {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 2rem;
+      color: var(--ghost);
+      margin-bottom: 0.5rem;
+    }
+    .jiji-text p { color: var(--chrome); font-size: 0.95rem; max-width: 420px; }
+    .jiji-badges { display: flex; gap: 0.5rem; margin-top: 1rem; flex-wrap: wrap; }
+    .badge {
+      background: var(--orange-glow);
+      border: 1px solid rgba(255,107,0,0.3);
+      color: var(--orange-light);
+      font-size: 0.75rem;
+      font-weight: 600;
+      padding: 4px 12px;
+      border-radius: 20px;
+      letter-spacing: 0.05em;
+    }
+
+    /* ── PAYMENTS ── */
+    #payments { background: var(--obsidian); }
+    .payments-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 1.5rem;
+    }
+    .payment-card {
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 2.2rem;
+      transition: border-color .3s, transform .3s;
+      position: relative;
+      overflow: hidden;
+    }
+    .payment-card::after {
+      content: '';
+      position: absolute; bottom: 0; left: 0; right: 0;
+      height: 3px;
+      background: linear-gradient(90deg, var(--orange), transparent);
+      opacity: 0;
+      transition: opacity .3s;
+    }
+    .payment-card:hover { border-color: rgba(255,107,0,0.4); transform: translateY(-4px); }
+    .payment-card:hover::after { opacity: 1; }
+    .payment-card h3 {
+      font-weight: 600;
+      font-size: 1.05rem;
+      color: var(--ghost);
+      margin-bottom: 0.7rem;
+      display: flex; align-items: center; gap: 10px;
+    }
+    .payment-card h3 span { font-size: 1.4rem; }
+    .payment-card p { color: var(--muted); font-size: 0.9rem; line-height: 1.65; }
+
+    /* ── MAP ── */
+    #location { background: var(--obsidian-2); }
+    .location-grid {
+      display: grid;
+      grid-template-columns: 1fr 1.4fr;
+      gap: 3rem;
+      align-items: start;
+    }
+    .location-info { display: flex; flex-direction: column; gap: 1.5rem; }
+    .contact-item {
+      display: flex; gap: 1rem; align-items: flex-start;
+      padding: 1.2rem;
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      transition: border-color .3s;
+    }
+    .contact-item:hover { border-color: var(--orange); }
+    .contact-item .ci-icon { font-size: 1.4rem; margin-top: 2px; flex-shrink: 0; }
+    .contact-item .ci-text strong { display: block; font-size: 0.78rem; color: var(--muted); text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 3px; }
+    .contact-item .ci-text span { color: var(--ghost); font-size: 0.95rem; }
+    .contact-item .ci-text a { color: var(--orange); text-decoration: none; }
+    .contact-item .ci-text a:hover { text-decoration: underline; }
+    .map-wrap {
+      border-radius: 10px;
+      overflow: hidden;
+      border: 1px solid var(--border);
+      height: 420px;
+      position: relative;
+    }
+    .map-wrap iframe {
+      width: 100%; height: 100%;
+      border: none; display: block;
+      filter: invert(0.85) hue-rotate(180deg) saturate(0.7);
+    }
+
+    /* ── FOOTER ── */
+    footer {
+      background: var(--obsidian-3);
+      border-top: 1px solid var(--border);
+      padding: 3.5rem 5vw 2rem;
+    }
+    .footer-grid {
+      display: grid;
+      grid-template-columns: 1.6fr 1fr 1fr;
+      gap: 3rem;
+      margin-bottom: 3rem;
+    }
+    .footer-brand .nav-logo { display: inline-block; margin-bottom: 1rem; }
+    .footer-brand p { color: var(--muted); font-size: 0.9rem; line-height: 1.7; max-width: 300px; }
+    .footer-col h4 {
+      font-size: 0.78rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--chrome);
+      margin-bottom: 1.2rem;
+    }
+    .footer-col ul { list-style: none; display: flex; flex-direction: column; gap: 0.7rem; }
+    .footer-col ul a {
+      color: var(--muted); text-decoration: none; font-size: 0.9rem;
+      transition: color .2s;
+    }
+    .footer-col ul a:hover { color: var(--orange); }
+    .footer-bottom {
+      border-top: 1px solid var(--border);
+      padding-top: 1.8rem;
+      display: flex; justify-content: space-between; align-items: center;
+      flex-wrap: wrap; gap: 1rem;
+    }
+    .footer-bottom p { color: var(--muted); font-size: 0.82rem; }
+    .footer-bottom a { color: var(--orange); text-decoration: none; }
+
+    /* ── SCROLL REVEAL ── */
+    .reveal {
+      opacity: 0;
+      transform: translateY(30px);
+      transition: opacity .7s ease, transform .7s ease;
+    }
+    .reveal.visible { opacity: 1; transform: translateY(0); }
+    .reveal-delay-1 { transition-delay: .1s; }
+    .reveal-delay-2 { transition-delay: .2s; }
+    .reveal-delay-3 { transition-delay: .3s; }
+    .reveal-delay-4 { transition-delay: .4s; }
+
+    /* ── FLOATING WHATSAPP ── */
+    .floating-wa {
+      position: fixed; bottom: 2rem; right: 2rem;
+      z-index: 200;
+      width: 56px; height: 56px;
+      background: #25D366;
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      box-shadow: 0 6px 24px rgba(37,211,102,0.4);
+      text-decoration: none;
+      transition: transform .3s, box-shadow .3s;
+      animation: pulse-green 2.5s infinite;
+    }
+    .floating-wa:hover {
+      transform: scale(1.1);
+      box-shadow: 0 10px 36px rgba(37,211,102,0.55);
+    }
+    .floating-wa svg { width: 28px; height: 28px; fill: white; }
+
+    /* ── ANIMATIONS ── */
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(24px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+    @keyframes bounce {
+      0%, 100% { transform: translateX(-50%) translateY(0); }
+      50% { transform: translateX(-50%) translateY(-8px); }
+    }
+    @keyframes pulse-green {
+      0%, 100% { box-shadow: 0 6px 24px rgba(37,211,102,0.4); }
+      50% { box-shadow: 0 6px 40px rgba(37,211,102,0.6); }
+    }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 900px) {
+      .how-grid { grid-template-columns: 1fr; }
+      .location-grid { grid-template-columns: 1fr; }
+      .footer-grid { grid-template-columns: 1fr 1fr; }
+      .how-visual { min-height: auto; }
+    }
+    @media (max-width: 700px) {
+      .nav-links { display: none; }
+      .hamburger { display: flex; }
+      nav { height: 64px; }
+      .footer-grid { grid-template-columns: 1fr; }
+      section { padding: 5rem 5vw; }
+      .stat-item + .stat-item::before { display: none; }
+      .jiji-banner { flex-direction: column; text-align: center; }
+      .jiji-badges { justify-content: center; }
+      body { cursor: auto; }
+      #cursor, #cursor-ring { display: none; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- Custom Cursor -->
+<div id="cursor"></div>
+<div id="cursor-ring"></div>
+
+<!-- Floating WhatsApp -->
+<a class="floating-wa" href="https://wa.me/233552807040" target="_blank" rel="noopener" aria-label="WhatsApp us">
+  <svg viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg">
+    <path d="M16 .5C7.44.5.5 7.44.5 16c0 2.8.73 5.44 2 7.74L.5 31.5l8-2.03A15.48 15.48 0 0016 31.5C24.56 31.5 31.5 24.56 31.5 16S24.56.5 16 .5zm0 28.38a13.36 13.36 0 01-6.82-1.87l-.49-.29-4.75 1.2 1.25-4.6-.32-.5A13.42 13.42 0 1116 28.88zm7.36-9.94c-.4-.2-2.37-1.17-2.74-1.3-.37-.14-.63-.2-.9.2s-1.03 1.3-1.26 1.57c-.23.26-.46.3-.86.1a10.9 10.9 0 01-3.2-1.98 12 12 0 01-2.21-2.76c-.23-.4-.02-.61.17-.81.18-.18.4-.46.6-.69.2-.23.27-.4.4-.66.14-.26.07-.5-.03-.7-.1-.2-.9-2.16-1.23-2.96-.32-.77-.65-.67-.9-.68h-.76a1.45 1.45 0 00-1.05.5 4.44 4.44 0 00-1.38 3.3 7.7 7.7 0 001.62 4.1c.2.26 2.76 4.22 6.69 5.92 4 1.74 4 1.16 4.72 1.09.72-.07 2.37-.97 2.7-1.9.34-.93.34-1.73.24-1.9-.1-.18-.37-.28-.77-.48z"/>
+  </svg>
+</a>
+
+<!-- NAV -->
+<nav id="navbar">
+  <a href="#home" class="nav-logo">EK <span>AUTOS</span></a>
+  <ul class="nav-links">
+    <li><a href="#services">Services</a></li>
+    <li><a href="#how-we-work">How It Works</a></li>
+    <li><a href="#inventory">Inventory</a></li>
+    <li><a href="#payments">Payments</a></li>
+    <li><a href="#location">Location</a></li>
+    <li><a href="https://jiji.com.gh/shop/ekapp" target="_blank" class="nav-cta">Shop on Jiji ↗</a></li>
+  </ul>
+  <div class="hamburger" id="hamburger" onclick="toggleMenu()" aria-label="Toggle navigation">
+    <span></span><span></span><span></span>
+  </div>
+</nav>
+
+<!-- MOBILE MENU -->
+<div class="mobile-menu" id="mobileMenu">
+  <ul>
+    <li><a href="#services" onclick="toggleMenu()">Services</a></li>
+    <li><a href="#how-we-work" onclick="toggleMenu()">How It Works</a></li>
+    <li><a href="#inventory" onclick="toggleMenu()">Inventory</a></li>
+    <li><a href="#payments" onclick="toggleMenu()">Payments</a></li>
+    <li><a href="#location" onclick="toggleMenu()">Location</a></li>
+    <li><a href="https://jiji.com.gh/shop/ekapp" target="_blank">🔗 Shop on Jiji</a></li>
+  </ul>
+</div>
+
+<!-- HERO -->
+<section class="hero" id="home">
+  <div class="hero-bg"></div>
+  <div class="hero-grid"></div>
+  <div class="beam" id="beam"></div>
+  <div class="hero-content">
+    <div class="hero-eyebrow">Accra's Trusted Auto Source</div>
+    <h1 class="hero-title">
+      Drive Your
+      <span class="accent">Dream</span>
+      Vehicle
+    </h1>
+    <p class="hero-sub">Quality vehicles and genuine spare parts, sourced from trusted suppliers worldwide — tailored to your needs and budget.</p>
+    <div class="hero-actions">
+      <a href="#inventory" class="btn-primary">🚗 Browse Inventory</a>
+      <a href="#how-we-work" class="btn-outline">How We Work →</a>
+    </div>
+  </div>
+  <div class="hero-scroll">
+    <div class="scroll-line"></div>
+    <span>Scroll</span>
+  </div>
+</section>
+
+<!-- STATS BAR -->
+<div class="stats-bar">
+  <div class="stat-item reveal">
+    <span class="stat-num" data-target="500">0</span>
+    <span class="stat-label">Vehicles Delivered</span>
+  </div>
+  <div class="stat-item reveal reveal-delay-1">
+    <span class="stat-num" data-target="100">0</span>
+    <span class="stat-label">% Genuine Parts</span>
+  </div>
+  <div class="stat-item reveal reveal-delay-2">
+    <span class="stat-num" data-target="5">0</span>
+    <span class="stat-label">+ Years in Business</span>
+  </div>
+  <div class="stat-item reveal reveal-delay-3">
+    <span class="stat-num" data-target="3">0</span>
+    <span class="stat-label">Vehicle Categories</span>
+  </div>
+</div>
+
+<!-- SERVICES -->
+<section id="services">
+  <div class="section-header reveal">
+    <div class="section-label">What We Offer</div>
+    <h2 class="section-title">Everything Automotive<br>Under One Roof</h2>
+    <p class="section-sub">From sourcing the right car to finding the exact spare part — we handle it all.</p>
+  </div>
+  <div class="services-grid">
+    <div class="service-card reveal">
+      <span class="service-icon">🚗</span>
+      <h3>Brand-New Vehicles</h3>
+      <p>Zero-mileage, factory-fresh cars sourced directly from trusted dealers worldwide. Every vehicle comes fully documented and verified.</p>
+    </div>
+    <div class="service-card reveal reveal-delay-1">
+      <span class="service-icon">🔑</span>
+      <h3>Quality Used Cars</h3>
+      <p>Pre-owned vehicles thoroughly vetted for condition and authenticity. Great options at honest prices — perfect for every budget.</p>
+    </div>
+    <div class="service-card reveal reveal-delay-2">
+      <span class="service-icon">🔧</span>
+      <h3>Accident Vehicles</h3>
+      <p>Salvage and accident vehicles for restorations, part-sourcing, or rebuild projects. Transparently priced, with full disclosure.</p>
+    </div>
+    <div class="service-card reveal reveal-delay-3">
+      <span class="service-icon">⚙️</span>
+      <h3>Genuine Spare Parts</h3>
+      <p>Original and OEM-grade parts for all major brands. We source globally so you get the exact part you need, faster.</p>
+    </div>
+    <div class="service-card reveal reveal-delay-1">
+      <span class="service-icon">🌍</span>
+      <h3>Global Sourcing</h3>
+      <p>Can't find what you need locally? We source from trusted suppliers worldwide and handle all logistics to your door.</p>
+    </div>
+    <div class="service-card reveal reveal-delay-2">
+      <span class="service-icon">📋</span>
+      <h3>Full Documentation</h3>
+      <p>We handle the paperwork. Title transfers, import documents, and registration assistance — stress-free from start to finish.</p>
+    </div>
+  </div>
+</section>
+
+<!-- HOW WE WORK -->
+<section id="how-we-work">
+  <div class="how-grid">
+    <div class="how-content">
+      <div class="section-label reveal">The Process</div>
+      <h2 class="section-title reveal">Simple Steps,<br>Zero Stress</h2>
+      <p class="section-sub reveal">Tell us what you want. We find it, source it, and deliver it — with full transparency at every step.</p>
+      <div class="process-steps">
+        <div class="step reveal">
+          <span class="step-num">01</span>
+          <div class="step-text">
+            <h4>Consult With Us</h4>
+            <p>Share your preferred vehicle type, make, model, and budget. We'll understand exactly what you need.</p>
+          </div>
+        </div>
+        <div class="step reveal reveal-delay-1">
+          <span class="step-num">02</span>
+          <div class="step-text">
+            <h4>We Search & Source</h4>
+            <p>Our team reaches trusted suppliers locally and internationally to find the best options matching your criteria.</p>
+          </div>
+        </div>
+        <div class="step reveal reveal-delay-2">
+          <span class="step-num">03</span>
+          <div class="step-text">
+            <h4>Inspect Before You Commit</h4>
+            <p>We present your options. You inspect the vehicle or parts before any payment is made. No surprises.</p>
+          </div>
+        </div>
+        <div class="step reveal reveal-delay-3">
+          <span class="step-num">04</span>
+          <div class="step-text">
+            <h4>Secure Payment & Transfer</h4>
+            <p>Payment through agreed channels. Full ownership transfer only after confirmed payment and documentation.</p>
+          </div>
+        </div>
+      </div>
+      <div class="notice-box reveal">
+        <h4>⚠️ Important Notice</h4>
+        <p>All vehicles and parts are subject to availability. EK AUTOS is not responsible for third-party delays or documentation processing times.</p>
+      </div>
+    </div>
+    <div class="how-visual reveal">
+      <div class="hex-bg"></div>
+      <div class="how-cards">
+        <div class="how-card">
+          <span class="how-card-icon">🌐</span>
+          <div class="how-card-text">
+            <strong>Trusted Global Network</strong>
+            Suppliers across Asia, Europe, USA & Gulf region
+          </div>
+        </div>
+        <div class="how-card">
+          <span class="how-card-icon">🔍</span>
+          <div class="how-card-text">
+            <strong>Tailored to Your Budget</strong>
+            We find options that fit your exact price range
+          </div>
+        </div>
+        <div class="how-card">
+          <span class="how-card-icon">🤝</span>
+          <div class="how-card-text">
+            <strong>Transparent Dealings</strong>
+            No hidden fees. What we quote is what you pay
+          </div>
+        </div>
+        <div class="how-card">
+          <span class="how-card-icon">🛡️</span>
+          <div class="how-card-text">
+            <strong>Inspection Before Purchase</strong>
+            We encourage all customers to inspect items personally
+          </div>
+        </div>
+        <div class="how-card">
+          <span class="how-card-icon">📦</span>
+          <div class="how-card-text">
+            <strong>End-to-End Service</strong>
+            From sourcing to delivery and documentation
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- INVENTORY / JIJI -->
+<section id="inventory">
+  <div class="inventory-inner">
+    <div class="section-label reveal">Our Stock</div>
+    <h2 class="section-title reveal">What's Available</h2>
+    <p class="section-sub reveal">We deal in a wide range of vehicles across all categories — from daily drivers to project cars and everything in between.</p>
+    <div class="vehicle-types">
+      <div class="vehicle-type-card reveal">
+        <span class="icon">🚘</span>
+        <h3>Saloons & Sedans</h3>
+        <p>Japanese, European & American makes</p>
+      </div>
+      <div class="vehicle-type-card reveal reveal-delay-1">
+        <span class="icon">🚙</span>
+        <h3>SUVs & 4×4s</h3>
+        <p>From compact crossovers to full-size off-roaders</p>
+      </div>
+      <div class="vehicle-type-card reveal reveal-delay-2">
+        <span class="icon">🚐</span>
+        <h3>Minivans & Buses</h3>
+        <p>Family & commercial transport options</p>
+      </div>
+      <div class="vehicle-type-card reveal reveal-delay-3">
+        <span class="icon">🚛</span>
+        <h3>Trucks & Commercial</h3>
+        <p>Pickups, lorries, and work vehicles</p>
+      </div>
+      <div class="vehicle-type-card reveal reveal-delay-1">
+        <span class="icon">⚙️</span>
+        <h3>Spare Parts</h3>
+        <p>Body parts, engines, electrical & more</p>
+      </div>
+    </div>
+    <div class="jiji-banner reveal">
+      <div class="jiji-text">
+        <h3>🛒 Browse Our Full Listings on Jiji</h3>
+        <p>Our complete inventory — vehicles and spare parts — is listed live on Jiji Ghana. Updated regularly with new stock, real photos, and honest prices.</p>
+        <div class="jiji-badges">
+          <span class="badge">Live Listings</span>
+          <span class="badge">Real Photos</span>
+          <span class="badge">Direct Contact</span>
+          <span class="badge">Negotiable</span>
+        </div>
+      </div>
+      <a href="https://jiji.com.gh/shop/ekapp" target="_blank" rel="noopener" class="btn-primary" style="flex-shrink:0; font-size:1rem; padding:18px 36px;">
+        Visit Our Shop ↗
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- PAYMENTS -->
+<section id="payments">
+  <div class="section-header reveal" style="text-align:center; max-width:600px; margin:0 auto 4rem;">
+    <div class="section-label">How We Handle Money</div>
+    <h2 class="section-title">Secure, Flexible<br>Payments</h2>
+    <p class="section-sub" style="margin:0 auto;">We keep the process straightforward and transparent — no surprises, no hidden fees.</p>
+  </div>
+  <div class="payments-grid">
+    <div class="payment-card reveal">
+      <h3><span>🔒</span> Secure Channels</h3>
+      <p>All payments are processed through mutually agreed-upon channels. We work with trusted methods to ensure your money is handled safely.</p>
+    </div>
+    <div class="payment-card reveal reveal-delay-1">
+      <h3><span>📄</span> Ownership Transfer</h3>
+      <p>Full legal ownership transfers only after confirmed payment and completion of all required documentation. You're protected throughout.</p>
+    </div>
+    <div class="payment-card reveal reveal-delay-2">
+      <h3><span>💬</span> Negotiate Directly</h3>
+      <p>Flexible terms are part of how we work. Talk to us about your budget — we find a way to make things work for both sides.</p>
+    </div>
+    <div class="payment-card reveal reveal-delay-3">
+      <h3><span>🧾</span> Full Documentation</h3>
+      <p>Every transaction comes with proper documentation. From receipts to title transfers, we keep a clean paper trail for your peace of mind.</p>
+    </div>
+  </div>
+</section>
+
+<!-- LOCATION -->
+<section id="location">
+  <div class="section-header reveal">
+    <div class="section-label">Find Us</div>
+    <h2 class="section-title">We're in the Heart<br>of Abossey Okai</h2>
+    <p class="section-sub">Accra's hub for auto parts and vehicles — and we're right in the middle of it.</p>
+  </div>
+  <div class="location-grid">
+    <div class="location-info">
+      <div class="contact-item reveal">
+        <span class="ci-icon">📍</span>
+        <div class="ci-text">
+          <strong>Address</strong>
+          <span>18 Peregrino Street, Abossey Okai<br>Accra, Ghana</span>
+        </div>
+      </div>
+      <div class="contact-item reveal reveal-delay-1">
+        <span class="ci-icon">🕐</span>
+        <div class="ci-text">
+          <strong>Business Hours</strong>
+          <span>Mon – Sat: 8:00 AM – 6:00 PM<br>Sunday: By Appointment</span>
+        </div>
+      </div>
+      <div class="contact-item reveal reveal-delay-2">
+        <span class="ci-icon">📞</span>
+        <div class="ci-text">
+          <strong>Phone / WhatsApp</strong>
+          <span><a href="tel:+233552807040">+233 XXX XXX XXX</a></span>
+        </div>
+      </div>
+      <div class="contact-item reveal reveal-delay-3">
+        <span class="ci-icon">🔗</span>
+        <div class="ci-text">
+          <strong>Online Shop</strong>
+          <span><a href="https://jiji.com.gh/shop/ekapp" target="_blank" rel="noopener">jiji.com.gh/shop/ekapp</a></span>
+        </div>
+      </div>
+      <a href="https://www.google.com/maps/dir/?api=1&destination=18+Peregrino+Street+Abossey+Okai+Accra+Ghana" target="_blank" rel="noopener" class="btn-primary reveal" style="margin-top:0.5rem; display:inline-flex; align-self:flex-start;">
+        🗺️ Get Directions
+      </a>
+    </div>
+    <div class="map-wrap reveal">
+      <iframe
+        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3970.948905543296!2d-0.23750348525786738!3d5.554749695967439!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0xfdf9b7c03b6a8cd%3A0x6f2de1c9b3e3e3e3!2sAbossey%20Okai%2C%20Accra%2C%20Ghana!5e0!3m2!1sen!2sgh!4v1680000000000!5m2!1sen!2sgh"
+        allowfullscreen="" loading="lazy"
+        referrerpolicy="no-referrer-when-downgrade"
+        title="EK AUTOS Location - 18 Peregrino Street, Abossey Okai, Accra">
+      </iframe>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-grid">
+    <div class="footer-brand">
+      <a href="#home" class="nav-logo">EK <span style="color:var(--orange)">AUTOS</span></a>
+      <p>Sourcing and delivering quality vehicles and genuine spare parts across Accra and Ghana — tailored to your needs and budget.</p>
+    </div>
+    <div class="footer-col">
+      <h4>Quick Links</h4>
+      <ul>
+        <li><a href="#services">Our Services</a></li>
+        <li><a href="#how-we-work">How We Work</a></li>
+        <li><a href="#inventory">Inventory</a></li>
+        <li><a href="#payments">Payments</a></li>
+        <li><a href="#location">Location</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Get in Touch</h4>
+      <ul>
+        <li><a href="https://jiji.com.gh/shop/ekapp" target="_blank">Jiji Shop ↗</a></li>
+        <li><a href="https://wa.me/233" target="_blank">WhatsApp</a></li>
+        <li><a href="tel:+233552807040">Call Us</a></li>
+        <li><a href="https://www.google.com/maps/search/18+Peregrino+Street+Abossey+Okai+Accra" target="_blank">Get Directions</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <p>© 2025 EK AUTOS. All rights reserved. · 18 Peregrino Street, Abossey Okai, Accra, Ghana</p>
+    <p>Built with ❤️ for <a href="#home">EK AUTOS</a></p>
+  </div>
+</footer>
+
+<script>
+  /* ── CURSOR ── */
+  const cursor = document.getElementById('cursor');
+  const ring   = document.getElementById('cursor-ring');
+  document.addEventListener('mousemove', e => {
+    cursor.style.left = e.clientX + 'px';
+    cursor.style.top  = e.clientY + 'px';
+    setTimeout(() => {
+      ring.style.left = e.clientX + 'px';
+      ring.style.top  = e.clientY + 'px';
+    }, 80);
+  });
+
+  /* ── BEAM ── */
+  const beam = document.getElementById('beam');
+  document.addEventListener('mousemove', e => {
+    const xPct = (e.clientX / window.innerWidth)  * 100;
+    const yPct = (e.clientY / window.innerHeight) * 100;
+    beam.style.background = `radial-gradient(ellipse 500px 300px at ${xPct}% ${yPct}%, rgba(255,107,0,0.09) 0%, transparent 70%)`;
+  });
+
+  /* ── NAV SCROLL ── */
+  const navbar = document.getElementById('navbar');
+  window.addEventListener('scroll', () => {
+    navbar.classList.toggle('scrolled', window.scrollY > 50);
+  });
+
+  /* ── MOBILE MENU ── */
+  function toggleMenu() {
+    document.getElementById('mobileMenu').classList.toggle('open');
+  }
+
+  /* ── SCROLL REVEAL ── */
+  const revealEls = document.querySelectorAll('.reveal');
+  const observer = new IntersectionObserver(entries => {
+    entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); observer.unobserve(e.target); } });
+  }, { threshold: 0.12 });
+  revealEls.forEach(el => observer.observe(el));
+
+  /* ── COUNTER ANIMATION ── */
+  const counters = document.querySelectorAll('.stat-num[data-target]');
+  const countObserver = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+      if (!entry.isIntersecting) return;
+      const el     = entry.target;
+      const target = +el.getAttribute('data-target');
+      const dur    = 1800;
+      const step   = target / (dur / 16);
+      let current  = 0;
+      const timer  = setInterval(() => {
+        current += step;
+        if (current >= target) { current = target; clearInterval(timer); }
+        el.textContent = Math.floor(current) + (target === 100 ? '' : '+');
+      }, 16);
+      countObserver.unobserve(el);
+    });
+  }, { threshold: 0.5 });
+  counters.forEach(c => countObserver.observe(c));
+</script>
+</body>
+</html>
